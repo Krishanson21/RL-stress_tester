@@ -1,0 +1,10 @@
+{
+  "project_name": "Nuxt 3 E-Commerce Target Platform",
+  "start_command": ["node", ".output/server/index.mjs"],
+  "test_command": ["node", "-e", "Promise.all([fetch('http://localhost:3000/api/checkout'), fetch('http://localhost:3000/api/checkout'), fetch('http://localhost:3000/api/checkout')]).then(responses => process.exit(responses.some(r => r.status >= 500) ? 1 : 0)).catch(() => process.exit(1))"],
+  "profiles": [
+    {"name": "Profile 0: Optimized Production", "env_vars": {"SYS_LATENCY": "0.1", "SYS_POOL_LIMIT": "15"}},
+    {"name": "Profile 1: Mid-Day Traffic Load", "env_vars": {"SYS_LATENCY": "0.3", "SYS_POOL_LIMIT": "8"}},
+    {"name": "Profile 2: Connection Starvation", "env_vars": {"SYS_LATENCY": "0.7", "SYS_POOL_LIMIT": "2"}}
+  ]
+}
