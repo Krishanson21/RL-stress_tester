@@ -1,9 +1,7 @@
-// server/api/checkout.ts
 let activeConnections = 0;
 const queue: (() => void)[] = [];
 
 export default defineEventHandler(async (event) => {
-  // Read tuning parameters dynamically passed down by the RL Agent
   const latency = parseFloat(process.env.SYS_LATENCY || "0.1");
   const poolLimit = parseInt(process.env.SYS_POOL_LIMIT || "10", 10);
 

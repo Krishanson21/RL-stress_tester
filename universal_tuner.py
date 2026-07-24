@@ -23,13 +23,13 @@ class UniversalWebTunerEnv(gym.Env):
         self.config_file = os.path.join(self.project_path, "autotune.json")
         
         if not os.path.exists(self.config_file):
-            print(f"❌ Error: Cannot find autotune.json inside '{self.project_path}'")
+            print(f"Error: Cannot find autotune.json inside '{self.project_path}'")
             sys.exit(1)
             
         with open(self.config_file, "r") as f:
             self.config = json.load(f)
             
-        print(f"📦 Initializing Autotuner for: {self.config['project_name']}")
+        print(f"Initializing Autotuner for: {self.config['project_name']}")
         
         self.num_actions = len(self.config["profiles"])
         self.action_space = spaces.Discrete(self.num_actions)
@@ -79,7 +79,6 @@ class UniversalWebTunerEnv(gym.Env):
         if not server_ready:
             test_failed = True
         else:
-            # Brief delay to allow Nitro route handlers to fully initialize
             time.sleep(1.5)
             try:
                 test_run = subprocess.run(
@@ -131,7 +130,7 @@ def execute_universal_tuner():
         print(f"Run {episode + 1:02d}: {info['profile_tested']} | Reward Result = {reward}")
         epsilon = max(0.1, epsilon * 0.6)
         
-    print("\n📊 Computed Optimization Policy Matrix:")
+    print("\n Computed Optimization Policy Matrix:")
     print(q_table)
     
     env.close()
